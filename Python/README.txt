@@ -1,5 +1,6 @@
 Short description:
     Bootstrapping.py: A python script to run a bootstrapping analysis for a list found mutations and sequence counts representing a population.
+    SynonymousMutations.py:
     
 
 System requirements
