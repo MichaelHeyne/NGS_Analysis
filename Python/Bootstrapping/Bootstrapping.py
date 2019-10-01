@@ -37,16 +37,23 @@ Sample = []
 MutatedPositions = ["11", "12", "13", "15", "16", "17", "18", "34", "35", "36", "37", "39"]
 OutsideMutatedPositionsName = "Outside Mutated Positions"
 DoubleMutantsName = "Double Mutants"
-filename = r"D:\Promotion\Matlab\Data\NGS_6.2Mix_sorted_Ch_aMT\2Mix\Combined\2Mix_singles_Si.xlsx"
+
+#Path of Input
+    #Input contains list of Mutants (column name: "Mutant") and sequence count for each mutant (column name: "Number of mutant in sorted population").
+    #The total number of sequences is listed in cell F1 of the input file.
+InputFile = r"D:\Promotion\Matlab\Data\NGS_6.2Mix_sorted_Ch_aMT\2Mix\Combined\2Mix_singles_Si.xlsx"
+
+#Path of Output
+OutputFile = r"D:\Promotion\Bootstrapping\2Mix_presorted_BovineTrypsin.xlsx"
 
 #Import Excel File and convert into a dictionary
-DataExcel = read_excel(filename) 
+DataExcel = read_excel(InputFile) 
 SampleDataFrame = DataFrame(DataExcel, columns= ["Mutant","Number of mutant in sorted population"])
 
 
 UnsortedUniqueElements = array(SampleDataFrame["Mutant"])
 ElementCount = array(SampleDataFrame["Number of mutant in sorted population"])
-NumberOfDoubleMutants = read_excel(filename, 'Sheet1', usecols = "F", nrows=1, header =None).iat[0,0] - sum(ElementCount)
+NumberOfDoubleMutants = read_excel(InputFile, 'Sheet1', usecols = "F", nrows=1, header =None).iat[0,0] - sum(ElementCount)
 
 OutsideMutatedPositions = 0
 for i in range(len(ElementCount)):
@@ -94,6 +101,6 @@ for i in range(len(SortedUniqueElements)):
 #Export Results to Excel file
 DictToExport = DictAllIntervals
 ResultsDataFrame = DataFrame(DictToExport.values(), columns= ["Standard Deviation","Standard Error","95% Confidence Interval","Mean Frequency","Measured Frequency"], index = DictToExport.keys())
-ResultsDataFrame.to_excel(r"D:\Promotion\Bootstrapping\2Mix_presorted_BovineTrypsin.xlsx")
+ResultsDataFrame.to_excel(OutputFile)
 
 print ("Calculation is finished")
