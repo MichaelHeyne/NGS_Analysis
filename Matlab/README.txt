@@ -3,7 +3,7 @@ Short description:
     
 System requirements:
     - a standard computer with enough RAM to support the in-memory operations
-    - MATLAB (tested on version 
+    - MATLAB (tested on version R2016B)
   
  Installation guide:
     - No installation needed
